@@ -1,14 +1,16 @@
+mod resolution;
+
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
 pub fn validate_input(input: &str) -> bool {
-    return input.len() > 5;
+    resolution::is_input_valid(input)
 }
 
 #[wasm_bindgen]
 pub fn calculate_resolution(input: &str) -> String {
-    if input.len() > 10 {
-        return "Length greater than 10!".to_owned();
+    match resolution::ClauseGraph::new(input) {
+        Ok(clause_graph) => clause_graph.get_solution(),
+        Err(message) => message,
     }
-    "Length smaller or equal to 10!".to_owned()
 }
