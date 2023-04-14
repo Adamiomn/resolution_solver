@@ -3,8 +3,11 @@ mod resolution;
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
-pub fn validate_input(input: &str) -> bool {
-    resolution::is_input_valid(input)
+pub fn try_parse_input(input: &str) -> String {
+    match resolution::try_parse_input(input) {
+        Ok(_) => "✅".to_owned(),
+        Err(message) => format!("❌ {}", message),
+    }
 }
 
 #[wasm_bindgen]

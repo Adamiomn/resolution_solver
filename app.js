@@ -1,23 +1,30 @@
-import { validate_input, calculate_resolution } from './pkg/resolution_solver.js';
+import init, { try_parse_input, calculate_resolution } from './pkg/resolution_solver.js';
 
-const inputStringElement = document.getElementById("input-string");
-const inputValidationElement = document.getElementById("input-validation");
-const calculateButton = document.getElementById("calculate-btn");
-const resultElement = document.getElementById("result");
+init().then(() => {
+	const inputStringElement = document.getElementById("input-string");
+	const inputValidationElement = document.getElementById("input-validation");
+	const calculateButton = document.getElementById("calculate-btn");
+	const resultElement = document.getElementById("result");
 
-inputStringElement.addEventListener("input", () => {
-	const input = inputStringElement.value;
-	const isValid = validate_input(input);
-	inputValidationElement.style.visibility = isValid ? "hidden" : "visible";
-});
+	handleInputChange();
 
-calculateButton.addEventListener("click", () => {
-	const input = inputStringElement.value;
-	if (validate_input(input)) {
-		const resolution = calculate_resolution(input);
-		const formattedResult = resolution.replace(/\n/g, '<br>');
-		resultElement.textContent = `The resolution is: ${formattedResult}`;
-	} else {
-		resultElement.textContent = "Invalid input. Please correct your input and try again.";
+	function handleInputChange() {
+		const input = inputStringElement.value;
+		const result = try_parse_input(input);
+		inputValidationElement.innerHTML = `${result}`;
+		inputStringElement.style.height = "auto";
+		inputStringElement.style.height = inputStringElement.scrollHeight + "px";
 	}
+
+	inputStringElement.addEventListener("input", handleInputChange);
+
+	calculateButton.addEventListener("click", () => {
+		const input = inputStringElement.value;
+		if (try_parse_input(input) == "✅") {
+			const resolution = calculate_resolution(input);
+			resultElement.innerHTML = `${resolution}`;
+		} else {
+			resultElement.innerHTML = "Invalid input. Please correct your input and try again.";
+		}
+	});
 });

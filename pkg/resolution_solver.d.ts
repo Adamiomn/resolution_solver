@@ -2,9 +2,9 @@
 /* eslint-disable */
 /**
 * @param {string} input
-* @returns {boolean}
+* @returns {string}
 */
-export function validate_input(input: string): boolean;
+export function try_parse_input(input: string): string;
 /**
 * @param {string} input
 * @returns {string}
@@ -15,11 +15,11 @@ export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembl
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
-  readonly validate_input: (a: number, b: number) => number;
+  readonly try_parse_input: (a: number, b: number, c: number) => void;
   readonly calculate_resolution: (a: number, b: number, c: number) => void;
+  readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
   readonly __wbindgen_malloc: (a: number) => number;
   readonly __wbindgen_realloc: (a: number, b: number, c: number) => number;
-  readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
   readonly __wbindgen_free: (a: number, b: number) => void;
 }
 

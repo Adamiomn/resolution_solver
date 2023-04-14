@@ -17,7 +17,7 @@ impl fmt::Display for ClauseEdge {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(
             f,
-            "Resolve {} and {} on literal '{}' to obtain {}",
+            "Resolve {} and {} on literal <span class='literal'>'{}'</span> to obtain {}",
             self.from.0, self.from.1, self.clashing_literal, self.to
         )
     }
@@ -28,8 +28,8 @@ pub struct ClauseGraph {
     edges: Vec<Vec<ClauseEdge>>,
 }
 
-pub fn is_input_valid(input: &str) -> bool {
-    parse_input(input).is_ok()
+pub fn try_parse_input(input: &str) -> Result<(), String> {
+    parse_input(input).map(|_| ())
 }
 
 impl ClauseGraph {
@@ -116,7 +116,7 @@ impl ClauseGraph {
         for (iteration, node_group) in node_groups_iterator {
             write!(
                 &mut result,
-                "Iteration {}: {}",
+                "Iteration {}: {}\n",
                 iteration,
                 display_clauses(node_group)
             )
@@ -223,8 +223,22 @@ impl ClauseGraph {
                     .sum::<usize>()
             )
             .expect("Failed to write result string. This is probably not recoverable.");
-            self.get_resolvents();
+            write!(&mut result, "{}", self.get_resolvents())
+                .expect("Failed to write result string. This is probably not recoverable.");
         }
+        result = result
+            .split("\n")
+            .map(|line| {
+                let mut modified_line = "<div class='result-line'>".to_owned();
+                if line.is_empty() {
+                    modified_line.push_str("&nbsp;");
+                } else {
+                    modified_line.push_str(line);
+                }
+                modified_line.push_str("</div>");
+                modified_line
+            })
+            .collect();
         result
     }
 }

@@ -47,7 +47,11 @@ impl fmt::Display for Clause {
             .iter()
             .map(|variable| format!("{}", variable))
             .collect();
-        write!(f, "{{{}}}", clause_string.join(", "))
+        write!(
+            f,
+            "<span class='clause'>{{{}}}</span>",
+            clause_string.join(", ")
+        )
     }
 }
 

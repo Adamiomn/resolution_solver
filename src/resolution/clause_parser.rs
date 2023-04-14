@@ -1,6 +1,9 @@
 use super::clause::{Clause, Literal};
 
 pub fn parse_input(input: &str) -> Result<Vec<Clause>, String> {
+    if input.len() == 0 {
+        return Err("No formula given.".to_owned());
+    }
     let mut brace_counter = 0;
     let mut max_brace_counter = 0;
     for chars in input.chars() {

@@ -9,13 +9,19 @@
 </head>
 
 <body>
-	<h1>Resolution Algorithm</h1>
-	<p>Enter your input string:</p>
-	<input id="input-string" type="text" placeholder="Enter input here">
-	<p id="input-validation">Enter a valid input string</p>
-	<button id="calculate-btn">Calculate Resolution</button>
-	<p>Result:</p>
-	<p id="result"></p>
+	<div class="container">
+		<div class="input-container">
+			<h1>Resolution Algorithm</h1>
+			<p class="desc-text">Enter your formula in clausal form (<span class='clause'>!</span>, <span
+					class='clause'>~</span>, <span class='clause'>¬</span>, <span class='clause'>not</span> and <span
+					class='clause'>\neg</span> allowed for negation):</p>
+			<textarea id="input-string" type="text" rows=1
+				placeholder="{{¬p, q}, {p, r}, {¬r, s}, {¬q, ¬s}}"></textarea>
+			<p id="input-validation">...</p>
+			<button id="calculate-btn">Calculate Resolution</button>
+		</div>
+		<p id="result"></p>
+	</div>
 
 	<script type="module" src="app.js"></script>
 	<script type="module">

@@ -1,17 +1,86 @@
 body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	background-color: #282c34;
+	color: #f0f0f0;
+	font-family: Arial, sans-serif;
+	font-size: 20px;
 }
 
-input, button {
-  font-size: 16px;
-  padding: 5px;
-  margin-top: 5px;
+h1 {
+	font-size: 60px;
+	font-variant: small-caps;
+}
+
+.container {
+	flex-basis: 60%;
+	max-width: 60%;
+	box-sizing: border-box;
+	padding: 0 20px;
+}
+
+textarea {
+	font-size: 20px;
+	background-color: #383e4a;
+	border: 1px solid #4a4a4a;
+	border-radius: 4px;
+	padding-top: 7px;
+	padding-left: 7px;
+	color: #f0f0f0;
+	overflow: hidden;
+	resize: none;
+	width: 75%;
+}
+
+button {
+	font-size: 20px;
+	background-color: #2d8604;
+	border: none;
+	border-radius: 4px;
+	color: white;
+	cursor: pointer;
+	margin-left: 10px;
+	padding: 10px 20px;
+	margin-bottom: 30px;
+}
+
+button:hover {
+	background-color: #3d9613;
+}
+
+.result {
+	border: 1px solid #4a4a4a;
+	border-radius: 4px;
+	margin-top: 20px;
+	padding: 10px;
+}
+
+.result-line {
+	margin-bottom: 0.6em;
+	/* Adjust the margin according to your preference */
 }
 
 #input-validation {
-  color: red;
-  visibility: hidden;
+	color: red;
+	text-align: center;
+}
+
+.desc-text {
+	text-align: center;
+}
+
+.input-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.clause {
+	font-weight: bold;
+	color: rgb(24, 163, 202);
+}
+
+.literal {
+	font-weight: bold;
+	color: rgb(214, 187, 36);
 }
