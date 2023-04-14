@@ -15,7 +15,8 @@ calculateButton.addEventListener("click", () => {
 	const input = inputStringElement.value;
 	if (validate_input(input)) {
 		const resolution = calculate_resolution(input);
-		resultElement.textContent = `The resolution is: ${resolution}`;
+		const formattedResult = resolution.replace(/\n/g, '<br>');
+		resultElement.textContent = `The resolution is: ${formattedResult}`;
 	} else {
 		resultElement.textContent = "Invalid input. Please correct your input and try again.";
 	}
