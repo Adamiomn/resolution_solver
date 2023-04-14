@@ -1,10 +1,26 @@
 /* tslint:disable */
 /* eslint-disable */
+/**
+* @param {string} input
+* @returns {boolean}
+*/
+export function validate_input(input: string): boolean;
+/**
+* @param {string} input
+* @returns {string}
+*/
+export function calculate_resolution(input: string): string;
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
+  readonly validate_input: (a: number, b: number) => number;
+  readonly calculate_resolution: (a: number, b: number, c: number) => void;
+  readonly __wbindgen_malloc: (a: number) => number;
+  readonly __wbindgen_realloc: (a: number, b: number, c: number) => number;
+  readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
+  readonly __wbindgen_free: (a: number, b: number) => void;
 }
 
 export type SyncInitInput = BufferSource | WebAssembly.Module;
