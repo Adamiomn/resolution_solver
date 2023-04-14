@@ -1,0 +1,14 @@
+{
+  "name": "resolution_solver",
+  "version": "0.1.0",
+  "files": [
+    "resolution_solver_bg.wasm",
+    "resolution_solver.js",
+    "resolution_solver.d.ts"
+  ],
+  "module": "resolution_solver.js",
+  "types": "resolution_solver.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
