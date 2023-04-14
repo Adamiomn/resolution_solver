@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resolution Algorithm</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Resolution Algorithm</h1>
+  <p>Enter your input string:</p>
+  <input id="input-string" type="text" placeholder="Enter input here">
+  <p id="input-validation">Enter a valid input string</p>
+  <button id="calculate-btn">Calculate Resolution</button>
+  <p>Result:</p>
+  <p id="result"></p>
+
+  <script src="app.js"></script>
+  <script type="module">
+    import init from './pkg/your_rust_project.js';
+    init();
+  </script>
+</body>
+</html>
