@@ -1,4 +1,4 @@
-import { validate_input, calculate_resolution } from './pkg/your_rust_project.js';
+import { validate_input, calculate_resolution } from './pkg/resolution_solver.js';
 
 const inputStringElement = document.getElementById("input-string");
 const inputValidationElement = document.getElementById("input-validation");
