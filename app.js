@@ -1,3 +1,5 @@
+import { validate_input, calculate_resolution } from './pkg/resolution_solver.js';
+
 const inputStringElement = document.getElementById("input-string");
 const inputValidationElement = document.getElementById("input-validation");
 const calculateButton = document.getElementById("calculate-btn");
