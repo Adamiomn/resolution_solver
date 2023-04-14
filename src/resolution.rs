@@ -6,6 +6,9 @@ use clause_parser::parse_input;
 use std::fmt::Write;
 use std::{fmt, rc::Rc};
 
+const WRITE_FAIL_MESSAGE: &'static str =
+    "Failed to write result string. This is probably not recoverable.";
+
 #[derive(PartialEq, Eq, Hash)]
 struct ClauseEdge {
     from: (Rc<Clause>, Rc<Clause>),
@@ -17,7 +20,7 @@ impl fmt::Display for ClauseEdge {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(
             f,
-            "Resolve {} and {} on literal <span class='literal'>'{}'</span> to obtain {}",
+            "Resolve {} and {} on literal <span class='literal'>{}</span> to obtain {}",
             self.from.0, self.from.1, self.clashing_literal, self.to
         )
     }
@@ -112,7 +115,7 @@ impl ClauseGraph {
         write!(&mut result,
             "Given: {}\n",
             display_clauses(node_groups_iterator.next().expect("No clauses were added to ClauseGraph. This is a bug and should be reported to the developer.").1)
-        ).expect("Failed to write result string. This is probably not recoverable.");
+        ).expect(WRITE_FAIL_MESSAGE);
         for (iteration, node_group) in node_groups_iterator {
             write!(
                 &mut result,
@@ -120,7 +123,7 @@ impl ClauseGraph {
                 iteration,
                 display_clauses(node_group)
             )
-            .expect("Failed to write result string. This is probably not recoverable.");
+            .expect(WRITE_FAIL_MESSAGE);
         }
         result
     }
@@ -176,9 +179,9 @@ impl ClauseGraph {
                     "The quickest way to get the empty set is to do these {} steps:\n",
                     shortest_steps
                 )
-                .expect("Failed to write result string. This is probably not recoverable.");
+                .expect(WRITE_FAIL_MESSAGE);
                 for step in all_options.first().expect("Formula is unsatisfiable but there are no steps to get the empty set. This is a bug and should be reported to the developer.").iter().rev() {
-                    write!(&mut result, "{}\n", step).expect("Failed to write result string. This is probably not recoverable.");
+                    write!(&mut result, "{}\n", step).expect(WRITE_FAIL_MESSAGE);
                 }
             } else {
                 write!(
@@ -187,14 +190,11 @@ impl ClauseGraph {
                     all_options.len(),
                     shortest_steps
                 )
-                .expect("Failed to write result string. This is probably not recoverable.");
+                .expect(WRITE_FAIL_MESSAGE);
                 for (iteration, steps) in (1..).zip(all_options.iter()) {
-                    write!(&mut result, "\nOption {}:\n", iteration)
-                        .expect("Failed to write result string. This is probably not recoverable.");
+                    write!(&mut result, "\nOption {}:\n", iteration).expect(WRITE_FAIL_MESSAGE);
                     for step in steps.iter().rev() {
-                        write!(&mut result, "{}\n", step).expect(
-                            "Failed to write result string. This is probably not recoverable.",
-                        );
+                        write!(&mut result, "{}\n", step).expect(WRITE_FAIL_MESSAGE);
                     }
                 }
             }
@@ -203,28 +203,25 @@ impl ClauseGraph {
                 &mut result,
                 "The formula is satisfiable! Take these steps to get all possible clauses:\n"
             )
-            .expect("Failed to write result string. This is probably not recoverable.");
+            .expect(WRITE_FAIL_MESSAGE);
             let mut edges_iter = self.edges.iter();
             edges_iter.next();
             for (iteration, edge_group) in (1..).zip(edges_iter) {
-                write!(&mut result, "\nIteration {}:\n", iteration)
-                    .expect("Failed to write result string. This is probably not recoverable.");
+                write!(&mut result, "\nIteration {}:\n", iteration).expect(WRITE_FAIL_MESSAGE);
                 for edge in edge_group {
-                    write!(&mut result, "{}\n", edge)
-                        .expect("Failed to write result string. This is probably not recoverable.");
+                    write!(&mut result, "{}\n", edge).expect(WRITE_FAIL_MESSAGE);
                 }
             }
             write!(
                 &mut result,
-                "\nAt the end you should get these {} clauses:\n\n",
+                "\nAt the end you should get these {} clauses:\n",
                 self.node_groups
                     .iter()
                     .map(|node_group| node_group.len())
                     .sum::<usize>()
             )
-            .expect("Failed to write result string. This is probably not recoverable.");
-            write!(&mut result, "{}", self.get_resolvents())
-                .expect("Failed to write result string. This is probably not recoverable.");
+            .expect(WRITE_FAIL_MESSAGE);
+            write!(&mut result, "{}", self.get_resolvents()).expect(WRITE_FAIL_MESSAGE);
         }
         result = result
             .split("\n")
