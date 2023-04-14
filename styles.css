@@ -13,8 +13,8 @@ h1 {
 }
 
 .container {
-	flex-basis: 60%;
-	max-width: 60%;
+	flex-basis: 50%;
+	max-width: 50%;
 	box-sizing: border-box;
 	padding: 0 20px;
 }

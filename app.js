@@ -8,15 +8,20 @@ init().then(() => {
 
 	handleInputChange();
 
-	function handleInputChange() {
-		const input = inputStringElement.value;
-		const result = try_parse_input(input);
-		inputValidationElement.innerHTML = `${result}`;
+	function adjustInputBoxSize() {
 		inputStringElement.style.height = "auto";
 		inputStringElement.style.height = inputStringElement.scrollHeight + "px";
 	}
 
+	function handleInputChange() {
+		const input = inputStringElement.value;
+		const result = try_parse_input(input);
+		inputValidationElement.innerHTML = `${result}`;
+		adjustInputBoxSize();
+	}
+
 	inputStringElement.addEventListener("input", handleInputChange);
+	addEventListener("resize", adjustInputBoxSize);
 
 	calculateButton.addEventListener("click", () => {
 		const input = inputStringElement.value;
